@@ -101,10 +101,6 @@ Plugin 설정
     플러그인을 사용하려면 설치한 다음, 설정 파일에 설치한 플러그인을 import한 후에, 
     plugins 속성에 import한 plugin을 추가한다.
 
-    
-
-
-
 간단 정리
 
     entry
@@ -132,3 +128,16 @@ Plugin 설정
         플러그인 등록.
 
     __dirname은 NodeJS에서 현재 프로젝트 디렉토리를 의미
+
+npm 설치 명령어 관련하여 정리
+
+
+    명령어 npm i -S moment는 무엇인가?
+
+        외부 라이브러리인 moment를 설치한다.
+        -S 는 dependencies로, 항상 설치되게 되어있다.
+
+    반대로 -D 는 devDepenencies로 개발환경에서만 의존하게 되어있다.
+    
+        ex) npm i -D (플러그인 또는 로더)
+        이 친구는 --production 옵션을 붙이면 빠지게 된다.

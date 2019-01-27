@@ -5,5 +5,10 @@
 // 그렇지 않으면 프로젝트 최상위 디렉토리가 아닌 node_modules 디렉토리를 뒤지게 된다. 
 import './style.css'
 
-const message = document.createTextNode("Webpack Example")
+// time.js ( Moment.js ) import. (외부 라이브러리를 import 하였다.)
+import { currentTime } from './time'
+
+// html 랜더링
+const message = document.createTextNode(`Webpack Example - ${currentTime()}`)
+
 document.body.appendChild(message)
