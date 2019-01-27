@@ -6,6 +6,20 @@
 
     웹팩은 기본적으로 여러 개의 자바스크립트 모듈을 하나의 파일로 묶어내는 번들러이다.
 
+    * Webpack은 웹페이지를 구성하는 수많은 요소
+      (html, js, css 파일 외에도, 웹폰트, 이미지, json 데이터 등)를 
+      파일 하나로 압축하여 웹페이지의 request 를 줄일 수 있도록 도와주는 
+      Gulp, Grunt 와같은 모듈 번들러이다.
+
+웹팩의 특징
+
+    1. 파일을 압축 및 난독화, 크로스 브라우징 대응
+    2. 수많은 의존관계로부터 의존성 관리가 효과적
+    3. 개발자가 자유롭게 번들링할 파일 수를 정할 수 있음 (설정을 통해)
+    4. 빠른 업데이트 (현재 Webpack 4 까지 릴리즈)
+    5. 기본적으로 ES6에서 추가된 모듈 시스템 개념 ( import, require, export)과
+       Node.js , npm 을 쓸 줄 알아야 한다.
+
 webpack 4 설치
 
     $ npm install --save-dev webpack webpack-cli
@@ -101,6 +115,15 @@ Plugin 설정
     플러그인을 사용하려면 설치한 다음, 설정 파일에 설치한 플러그인을 import한 후에, 
     plugins 속성에 import한 plugin을 추가한다.
 
+Mode 설정
+
+    Webpack 4 에서 새로 추가된 옵션이다.
+    mode 가 development 면 개발용,
+    production 이면 배포용이다.
+    배포용일 경우에는 알아서 최적화가 적용된다.
+    mode 옵션의 추가로 개발용과 배포용으로 webpack.config.js 를 나누기가
+    더욱 편리해졌다.
+
 간단 정리
 
     entry
@@ -123,14 +146,15 @@ Plugin 설정
     
         로더 등록.
 
+            * exclude는 제외할 파일들을 정규식으로 정의한다.
+
     plugins	
     
         플러그인 등록.
 
-    __dirname은 NodeJS에서 현재 프로젝트 디렉토리를 의미
+    * __dirname은 NodeJS에서 현재 프로젝트 디렉토리를 의미
 
 npm 설치 명령어 관련하여 정리
-
 
     명령어 npm i -S moment는 무엇인가?
 
@@ -141,3 +165,248 @@ npm 설치 명령어 관련하여 정리
     
         ex) npm i -D (플러그인 또는 로더)
         이 친구는 --production 옵션을 붙이면 빠지게 된다.
+
+로더 정리
+
+    style-loader, css-loader : 보통 CSS를 번들링하기 위해서 쓰는 loader 세트이다.
+
+    sass-loader : scss 및 sass 를 해석할 수 있게 해주는 loader 이다.
+
+--------------------------------------------------------------------------------------
+
+Node.js
+
+    자바스크립트 문법으로 웹서버나 smtp 서버 등과 같은 
+    서버 프로그램을 작성할 수 있게 하는 서버 사이드 자바스크립트 언어.
+
+    Express.js 프레임워크를 사용하면 번거로운 작업들을 해결해주어 
+    빠르게 웹서버를 구축할 수 있다.
+
+NPM
+
+    Node.js 기반 패키지 모듈을 관리하는 도구.
+    작은 모듈들을 필요함에 따라 설치하여 개발자에게 편리함을 제공한다.
+    Terminal 에서 명령어를 입력하여 실행한다.
+    package.json 을 설치하여 이 파일로 모듈들을 관리한다.
+
+터미널 명령어
+
+    1) 설치
+    npm install (모듈 설치)
+    npm install --save-dev package (개발모듈로 패키지 설치)
+    npm install --save package (배포모듈로 패키지 설치)
+    npm install --g package (global로 패키지설치)
+
+    2) 제거
+    npm uninstall package
+
+    3) package.json 생성
+    npm init
+    npm init y (옵션 설정없이 바로 package.json을 생성해주는 명령어)
+
+    Npm 을 통하여 설치한 의존성 모듈들의 버젼 관리와 프로젝트에 대한 관리를 하는 파일이다.
+    
+    * script에서 run 명령어를 설정해주어 실행할 모듈을 설정해줄 수 있다.
+      (ex) npm run ~~~ 처럼 웹팩설정의 scripts 속성에서
+           사용자 편의에 맞게 설정해놓고 명렁어들을 단축하여 사용 가능함)
+    
+    의존성 모듈들은 dependencies 모듈에, 개발의존성 모듈들은 devDepenencies 모듈로
+    설치하여 준다.
+
+ES6 & Babel
+
+    TypeScript, CoffeScript, ES6 등 기존 Javascript 문법이 아닌 
+    각각의 문법으로 코딩된 소스를 Javascript 문법으로 transcompile 해주는 
+    모던 웹기술에서 필수적인 모듈이다.
+
+    * babel-cli
+
+        tranpile을 진행해주는 코어 기능만 있음
+
+    * babel-preset-env
+
+        arrow function을 트랜스파일하려면 해당하는 플러그인을 추가로 설치해야한다.
+        이처럼 기능별로 플러그인들을 개별적으로 설치하려면 귀찮은 일
+
+        프리셋이란?
+
+            버전별로 필요 플러그인들을 모아놓은 셋트이다.
+
+        babel-preset-env는 이러한 프리셋과 플러그인들을 모아서 관리하고 있는 모듈이다
+        babel-preset-env 를 설치하고 다시 바벨을 실행해도 ES5로 바뀌지 않은 원본 그대로 출력된다.
+        
+        p.s ) node.js 에서는
+              어떤 프리셋을 사용하는지 
+              --presets 옵션을 이용하여 전달하여야 한다.
+        
+        node.js 예시
+
+            npx babel ./es6test.js --out-file es5.js --presets=es2015
+
+        es5.js 파일을 열어보면 아래와 같이 ES5 코드로 변경되었음을 알 수 있다.
+
+    * babelrc
+
+        바벨은 .babelrc 라는 파일명으로 프로젝트의 바벨 관련 설정을 등록할 수 있고 
+        package.json 에서 babel 이란 키로 설정을 추가할 수도 있지만 
+        .babelrc 를 사용하는것을 추천한다. 
+        
+        babel-cli 를 실행하면서 매번 커맨드라인으로 옵션을 줄 수 있지만,
+        바벨에 사용되는 옵션은 보통 프로젝트 별로 정해져있기 때문에 
+        관리와 환경 공유를 위해 설정 파일에 저장한다. 
+        
+        커맨드라인 옵션으로 사용할 수 있는 대부분의 내용은 설정 파일로 저장할 수 있다. 
+        사실 웹팩과 연계하면 커맨드라인에서 바벨을 실행할 일도 없다. 
+        앞서 다룬 커맨드라인 옵션은 간단하게 아래와 같이 설정할 수 있다.
+
+            {
+                "presets": ["es2015"]
+            }
+
+        트랜스파일할 대상과 결과 파일을 저장하는 옵션 --out-file 은 설정 파일에 저장할 수 없다.
+        어차피 사용할 ECMAScript 스펙에 대한 설정 정도만 .babelrc 에 저장하고 
+        나머지는 웹팩에 맡기기 때문에 특별히 설정을 복잡하게 할 일도 없다.
+
+            {
+                "presets": ["env"]
+            }
+
+        프리셋을 "env" 로 설정하면 babel-preset-latest 라고 불리는 
+        현재 지원 가능한 가장 최신 버전의 프리셋을 사용하고 추가로 프로젝트의 
+        지원 브라우저를 기반으로 폴리필과 ,
+        필요 트랜스폼 플러그인들을 관리할 수 있는 옵션들을 사용할 수 있다.
+
+        아직 정식 버전에는 포함되어 있지 않은 새로운 스펙들은 plugins 배열로 추가할 수 있다.
+
+    * babel-loader
+
+        .babelrc 의 설정이 제대로 잡혀있다면 웹팩과의 연동은 어렵지 않다. 
+        웹팩에서 바벨을 연동할 수 있게 babel-loader 를 설치 한다.
+
+            npm i babel-loader --save-dev
+
+        그리고 module.rules 옵션에 로더를 추가 한다.
+
+        rules 옵션에서 test 는 해당 로더가 적용될 파일을 정의하고,
+        exclude는 제외할 파일들을 정규식으로 정의한다. 
+        exclude 는 /node_modules/ 로 정의했는데 이렇게 하면 
+        /node_modules/ 디렉터리의 하위 내용은 모두 포함되지 않는다.
+
+        rules 옵션은 특정 조건의 파일을 기준으로 적용되어야 할 로더들을 
+        정의하기 때문에 rules 에 로더 하나씩 정의할 수도 있고,
+        특정 파일들에 여러 개의 로더가 적용되는경우 
+        중복해서 정의하지 않고 use 옵션을 배열로 넘긴다.
+
+    이외에도 babel-polyfill 패키지를 추가적으로 설치하여 
+    ES6 문법만 컴파일하여 사용하는게 아닌, ES6 의 새로운 객체들
+    (Promise, MAP 등)을 컴파일하여 사용할 수 있다.
+
+Webpack 에서 Babel 세팅하기 예시
+
+    npm install --save-dev @babel/core @babel/cli @babel/preset-env
+    npm install --save @babel/polyfill
+    npm install --save-dev babel-loader
+
+이것 저것 설치하는 라이브러리들
+
+    babel-preset-react 
+
+        바벨을 리액트에서 사용하게 해준다. 리액트를 쓸거면 이게 필요하다. 
+        달리 말하면 바벨과 리액트는 별개 프로젝트다.
+
+        for compiling JSX and other stuff down to Javascript
+
+            npm install --save-dev @babel/preset-react
+
+    webpack
+
+        웹팩을 쓰기 위해 필요하다.
+
+    babel-core
+
+        웹팩용 바벨이다. 터미널에서 쓸 떄 babel-cli 를 썼는데, 이걸 웹팩에서
+        사용하는 용도다.
+
+    babel-loader
+
+        웹팩에서 바벨을 로드할 때 이 로더를 쓴다.
+
+        module.exports = {
+            module: {
+                rules: [
+                {
+                    test: /\.(js|jsx)$/,
+                    exclude: /node_modules/,
+                    use: {
+                        loader: "babel-loader"
+                        }
+                    }
+                ]
+            }
+        };
+
+    react-dom 
+    
+        원래는 react에 함께 있었으나 이렇게 따로 떨어져 나왔다. 
+        react와 DOM 사이에 연결해주는 역할을 한다.
+
+    react
+    
+        리액트를 사용하려면 당연히 리액트 라이브러리가 필요하지 않겠는가?
+
+    babel-preset-env
+
+        바벨은 babel-preset-es2017과 같이 여러 버전이 있다. 딴거 말고 이거 깔면 알아서 해준다.
+
+        for compiling Javascript ES6 code down to ES5 (please note that babel-preset-es2015 is now deprecated)
+
+    babel-polyfill
+
+        바벨 폴리필은 필요 ECMAScript 버전에 포함된 빌트인 객체나 메서드들을 추가해준다. 
+        즉 특정 버전의 런타임 환경을 만들어 준다. 
+        예를 들면 Promise 가 없는 브라우저 환경에 Promise 를 만들어준다. 
+        바벨로 트랜스 파일 된 코드를 사용하고자 한다면 번들링된 파일을 로드하기 전에 
+        브라우저에 먼저 로드되어야 한다. 사실 babel-polyfill 은 웹팩과는 상관없이 
+        바벨을 위해 필요한 부분이지만 웹팩을 이용해 번들링해서 사용한다.
+
+        - 새로 추가된 전역 객체들(Promise, Map, Set)을 사용가능한 객체로 바꾸어주는 개념 
+
+        - 브라우저 파편화를 해결하기 위해 지원하지 않는 공백을 매꾸는 스크립트나 기타 코드를 끼워넣어줌
+
+리액트 바벨 프리셋 예시
+
+    {
+        "presets": ["@babel/preset-env", "@babel/preset-react"]
+    }
+
+웹팩 바벨 3대장
+
+    npm install babel-loader babel-core babel-preset-env
+
+sass-loader
+
+    you can easily add sass/scss support to your project.
+
+        npm install node-sass sass-loader
+
+    Sass-loader needs node-sass to work. 
+    Now you just need to add it to the loader chain in webpack.config.js.
+
+* sass 2대장 - node-sass, sass-loader이고 설정은
+
+    module.exports = {
+        module: {
+            rules: [
+                {
+                    test: /\.scss$/,
+                    use: ['style-loader', 'css-loader', 'sass-loader']
+                }
+            ]
+        },
+    }
+
+* The babel and webpack packages will go into the devDependencies section 
+  because these packages are used in when transpiling and bundle-ing your code 
+  into vanilla javascript in the bundle.js & etc file(s).
+
+  In production you will run your code off the bundle.js build/generated code will not require these dependencies anymore.

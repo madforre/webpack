@@ -7,8 +7,10 @@ module.exports = {
     // 번들링 결과를 dist/main.js 기본 설정 대신 경로를 변경
     output: {
         // __dirname 은 현재 디렉토리 의미
+        // path 로 번들된 파일을 놓을 경로를 설정한다.
         path: __dirname,
         // 이제 웹팩을 실행하면 최상위 디렉토리에 build.js 가 생성된다.
+        // 번들된 파일의 이름을 설정한다.
         filename: 'build.js'
     },
     // module 관련 속성 추가.
@@ -21,8 +23,16 @@ module.exports = {
                 test: /\.css$/, // 확장자가 css 인 파일만 인식하도록 설정
                 use: [
                     'style-loader',
-                    'css-loader'
+                    'css-loader',
+                    'sass-loader'
                 ]
+            },
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                use: {
+                  loader: "babel-loader"
+                }
             }
         ]
     },
