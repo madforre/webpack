@@ -22,15 +22,24 @@ module.exports = {
                 // use 항목에 등록된 로더를 통해서 처리되게 된다.
                 test: /\.css$/, // 확장자가 css 인 파일만 인식하도록 설정
                 use: [
-                    'style-loader',
+                    'style-loader', //creates style nodes from JS strings
                     'css-loader',
-                    'sass-loader'
-                ]
+                ],
+            },
+            {
+                test: /\.scss$/, 
+                use: [
+                    // 로더가 여러개면 배열로 요렇게 불러온다.
+                    "style-loader",
+                    'css-loader', // translates CSS into CommonJS
+                    "sass-loader" // compiles Sass to CSS, using Node Sass by default
+                ],
             },
             {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: {
+                    // 단일 로더면 요렇게 불러온다.
                   loader: "babel-loader"
                 }
             }

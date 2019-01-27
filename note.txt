@@ -387,7 +387,9 @@ sass-loader
 
     you can easily add sass/scss support to your project.
 
-        npm install node-sass sass-loader
+        npm install node-sass sass-loader --save-dev
+
+        덤으로 npm install style-loader css-loader --save-dev 도 필요함.
 
     Sass-loader needs node-sass to work. 
     Now you just need to add it to the loader chain in webpack.config.js.
