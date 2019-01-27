@@ -66,11 +66,43 @@ Loader 성정
     VUE 등 다양한 종류의 파일을 함께 번들링 할 수 있다. 웹팩의 강력한 기능 중 하나이다.
 
     웹팩이 css 파일을 처리할 수 있게 만들어주는 style-loader 와 
-    css-loader 패키지 등이 있다.
+    css-loader 패키지가 있다.
 
         npm i --D style-loader css-loader
 
         npm install --save-dev style-loader css-loader
+
+    로더들을 설치한 후 ./src/index.js 같은 입력 파일에서 JS 파일을 import 하듯이
+    CSS 파일을 import 해주자.
+
+    마지막으로 CSS 파일이 설치한 두개의 모듈에 의해서 처리될 수 있도록
+    웹팩 설정을 해주자.
+
+        설정파일을 열어 module 속성을 추가하고, 그 안에 rules 속성을 통해
+        처리 규칙을 등록한다.
+
+        * test 항목에 정의된 정규식에 매칭되는 파일은
+          use 항목에 등록된 로더를 통해서 처리되게 된다.
+
+    이제 다시 웹팩을 실행해보자!
+
+        npx webpack
+
+        이제 반영될 것이다!
+
+Plugin 설정
+
+    플러그인을 통해서 로더로 설정이 애매한 부분들을 커버할 수 있다.
+    예를 들어, 웹팩을 실행할 때 마다 기존에 있던 번들 파일을 먼저 깔끔히 지우고 
+    싶은 경우에는 clean-webpack-plugin 플러그인을 사용할 수 있다.
+
+        $ npm i -D clean-webpack-plugin
+
+    플러그인을 사용하려면 설치한 다음, 설정 파일에 설치한 플러그인을 import한 후에, 
+    plugins 속성에 import한 plugin을 추가한다.
+
+    
+
 
 
 간단 정리
